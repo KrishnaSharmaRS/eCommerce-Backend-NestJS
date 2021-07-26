@@ -5,11 +5,16 @@ import { sequelizeModuleOptions } from "./configs/sequelize.config";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { UsersModule } from "./users/users.module";
 import { TrimRequestStringsMiddleware } from "./helpers/custom-middlewares";
 
+// -------------------------------- MODULES -------------------------------------
+import { UsersModule } from "./modules/users/users.module";
+import { ProductsModule } from "./modules/products/products.module";
+import { OrdersModule } from "./modules/orders/orders.module";
+import { CouponsModule } from "./modules/coupons/coupons.module";
+
 @Module({
-  imports: [SequelizeModule.forRoot(sequelizeModuleOptions), UsersModule],
+  imports: [SequelizeModule.forRoot(sequelizeModuleOptions), UsersModule, ProductsModule, OrdersModule, CouponsModule],
   controllers: [AppController],
   providers: [AppService],
 })

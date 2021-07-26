@@ -9,7 +9,7 @@ import { UserModel } from "./user.model";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(UserModel) private userModel: typeof UserModel) {}
+  constructor(@InjectModel(UserModel) private readonly userModel: typeof UserModel) {}
 
   async getAllUsers(attributes?: FindAttributeOptions) {
     const users = await this.userModel.findAll({ attributes });
@@ -31,12 +31,7 @@ export class UsersService {
 
       return response;
     } catch (error) {
-      if (error instanceof UniqueConstraintError)
-        throw new ConflictException(
-          `A user with '${error.errors[0]?.value || createUserDto.email}' ${error.errors[0]?.path || "email"} already exists! ${
-            error.errors[0]?.path?.toUpperCase() || "Email"
-          } must be unique.`,
-        );
+      if (error instanceof UniqueConstraintError) throw new ConflictException(`A user with '${error.errors[0]?.value || createUserDto.email}' already exists!`);
 
       throw new InternalServerErrorException(internalServerErrorMessage);
     }

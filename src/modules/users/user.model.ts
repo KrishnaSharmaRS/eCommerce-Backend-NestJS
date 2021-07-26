@@ -1,9 +1,14 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { col, fn } from "sequelize";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { genSaltSync, hashSync } from "bcryptjs";
 
 import { IUser, IUserCreation } from "./users.types";
+import { UserCartItemModel } from "./user-cart-items/user-cart-item.model";
+import { UserAddressModel } from "./user-addresses/user-address.model";
+import { IUserCartItem } from "./user-cart-items/user-cart-items.types";
+import { IUserAddress } from "./user-addresses/user-addresses.types";
 
-@Table({ tableName: "users", paranoid: true, modelName: "user", underscored: false })
+@Table({ tableName: "users", paranoid: true, modelName: "user", underscored: false, indexes: [{ unique: true, name: "user_email", fields: [fn("lower", col("email"))] }] })
 export class UserModel extends Model<IUser, IUserCreation> implements IUser {
   @Column({ allowNull: false, type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
   id: string;
@@ -45,4 +50,10 @@ export class UserModel extends Model<IUser, IUserCreation> implements IUser {
 
   @Column({})
   deletedAt: Date | null;
+
+  @HasMany(() => UserCartItemModel, { constraints: false, as: "cartItems", foreignKey: "userId" })
+  cartItems: IUserCartItem[];
+
+  @HasMany(() => UserAddressModel, { constraints: false, as: "addresses", foreignKey: "userId" })
+  addresses: IUserAddress[];
 }

@@ -1,7 +1,7 @@
 import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength, MinLength } from "class-validator";
-import { IsStringLength } from "src/helpers/custom-validators";
 
 import { IUserCreation } from "./users.types";
+import { IsStringLength } from "../../helpers/custom-validators";
 
 export class CreateUserDto implements IUserCreation {
   @IsStringLength({ min: 2, max: 20 })
