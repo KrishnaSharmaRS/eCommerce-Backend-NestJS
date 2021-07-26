@@ -1,11 +1,13 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 
-import { IUserCartItem, IUserCartItemCreation } from "./user-cart-items.types";
+import { ICartItem, ICartItemCreation } from "./cart-items.types";
 import { UserModel } from "src/modules/users/user.model";
 import { IUser } from "../users.types";
+import { IProduct } from "src/modules/products/products.types";
+import { ProductModel } from "src/modules/products/product.model";
 
-@Table({ tableName: "cart_items", paranoid: true, modelName: "userCartItem", underscored: false })
-export class UserCartItemModel extends Model<IUserCartItem, IUserCartItemCreation> implements IUserCartItem {
+@Table({ tableName: "cart_items", paranoid: true, modelName: "cartItem", underscored: false })
+export class CartItemModel extends Model<ICartItem, ICartItemCreation> implements ICartItem {
   @Column({ allowNull: false, type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
   id: string;
 
@@ -32,6 +34,9 @@ export class UserCartItemModel extends Model<IUserCartItem, IUserCartItemCreatio
 
   @Column({})
   deletedAt: Date | null;
+
+  @BelongsTo(() => ProductModel, { foreignKey: "productId", constraints: false, as: "product" })
+  product: IProduct;
 
   @BelongsTo(() => UserModel, { foreignKey: "userId", constraints: false, as: "user" })
   user: IUser;

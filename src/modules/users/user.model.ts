@@ -3,10 +3,10 @@ import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { genSaltSync, hashSync } from "bcryptjs";
 
 import { IUser, IUserCreation } from "./users.types";
-import { UserCartItemModel } from "./user-cart-items/user-cart-item.model";
-import { UserAddressModel } from "./user-addresses/user-address.model";
-import { IUserCartItem } from "./user-cart-items/user-cart-items.types";
-import { IUserAddress } from "./user-addresses/user-addresses.types";
+import { CartItemModel } from "./cart-items/cart-item.model";
+import { AddressModel } from "./addresses/address.model";
+import { ICartItem } from "./cart-items/cart-items.types";
+import { IAddress } from "./addresses/addresses.types";
 
 @Table({ tableName: "users", paranoid: true, modelName: "user", underscored: false, indexes: [{ unique: true, name: "user_email", fields: [fn("lower", col("email"))] }] })
 export class UserModel extends Model<IUser, IUserCreation> implements IUser {
@@ -51,9 +51,9 @@ export class UserModel extends Model<IUser, IUserCreation> implements IUser {
   @Column({})
   deletedAt: Date | null;
 
-  @HasMany(() => UserCartItemModel, { constraints: false, as: "cartItems", foreignKey: "userId" })
-  cartItems: IUserCartItem[];
+  @HasMany(() => CartItemModel, { constraints: false, as: "cartItems", foreignKey: "userId" })
+  cartItems: ICartItem[];
 
-  @HasMany(() => UserAddressModel, { constraints: false, as: "addresses", foreignKey: "userId" })
-  addresses: IUserAddress[];
+  @HasMany(() => AddressModel, { constraints: false, as: "addresses", foreignKey: "userId" })
+  addresses: IAddress[];
 }

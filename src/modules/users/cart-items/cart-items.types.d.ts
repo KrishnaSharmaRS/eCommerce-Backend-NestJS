@@ -1,7 +1,7 @@
 import { Optional } from "sequelize/types";
 import { IModel, OptionalCreationAttributes } from "src/utilities/global";
 
-export interface IUserCartItem extends IModel {
+export interface ICartItem extends IModel {
   quantity: number;
   color: string;
   size: string;
@@ -9,6 +9,6 @@ export interface IUserCartItem extends IModel {
   userId: string;
 }
 
-export type TCartOptionalAttributes = OptionalCreationAttributes;
+export type TCartItemOptionalAttributes = OptionalCreationAttributes;
 
-export type IUserCartItemCreation = Optional<IUserCartItem, TCartOptionalAttributes>;
+export type ICartItemCreation = Optional<ICartItem, TCartItemOptionalAttributes>;

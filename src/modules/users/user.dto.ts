@@ -1,4 +1,4 @@
-import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsInt, IsOptional, IsString, IsUrl } from "class-validator";
 
 import { IUserCreation } from "./users.types";
 import { IsStringLength } from "../../helpers/custom-validators";
@@ -31,29 +31,23 @@ export class CreateUserDto implements IUserCreation {
 }
 
 export class UpdateUserDto implements IUserCreation {
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(20)
   @IsOptional()
+  @IsStringLength({ min: 2, max: 20 })
   firstName: string;
 
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(20)
   @IsOptional()
+  @IsStringLength({ min: 2, max: 20 })
   lastName: string;
 
+  @IsOptional()
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(20)
   @IsOptional()
+  @IsStringLength({ min: 8, max: 20 })
   password: string;
 
   @IsOptional()
-  @IsString()
   @IsUrl()
   profilePicture: string;
 

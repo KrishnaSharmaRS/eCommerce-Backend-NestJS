@@ -4,13 +4,13 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { UsersController } from "./users.controller";
 import { UsersService } from "./users.service";
 import { UserModel } from "./user.model";
-import { UserAddressesModule } from "./user-addresses/user-addresses.module";
-import { UserCartItemsModule } from "./user-cart-items/user-cart-items.module";
+import { AddressesModule } from "./addresses/addresses.module";
+import { CartItemsModule } from "./cart-items/cart-items.module";
 
 @Module({
-  imports: [SequelizeModule.forFeature([UserModel]), UserAddressesModule, UserCartItemsModule],
+  imports: [SequelizeModule.forFeature([UserModel]), AddressesModule, CartItemsModule],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [SequelizeModule, UserAddressesModule, UserCartItemsModule],
+  exports: [SequelizeModule],
 })
 export class UsersModule {}

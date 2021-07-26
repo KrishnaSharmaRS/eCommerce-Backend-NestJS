@@ -1,7 +1,7 @@
 import { Optional } from "sequelize/types";
 import { IModel, OptionalCreationAttributes } from "src/utilities/global";
 
-export interface IUserAddress extends IModel {
+export interface IAddress extends IModel {
   landmark: string;
   apartment: string;
   street: string;
@@ -13,6 +13,6 @@ export interface IUserAddress extends IModel {
   userId: string;
 }
 
-export type TUserOptionalAttributes = OptionalCreationAttributes;
+export type TAddressOptionalAttributes = OptionalCreationAttributes;
 
-export type IUserAddressCreation = Optional<IUserAddress, TUserOptionalAttributes>;
+export type IAddressCreation = Optional<IAddress, TAddressOptionalAttributes>;

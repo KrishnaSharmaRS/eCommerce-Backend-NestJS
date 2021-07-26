@@ -20,8 +20,6 @@ export class UsersService {
   async getUserById(userId: string, attributes?: FindAttributeOptions) {
     const user = await this.userModel.findOne({ where: { id: userId }, attributes });
 
-    if (!user) throw new NotFoundException(`Invalid User ID, No user found with ID: ${userId}`);
-
     return user;
   }
 
@@ -31,7 +29,7 @@ export class UsersService {
 
       return response;
     } catch (error) {
-      if (error instanceof UniqueConstraintError) throw new ConflictException(`A user with '${error.errors[0]?.value || createUserDto.email}' already exists!`);
+      if (error instanceof UniqueConstraintError) throw new ConflictException(`A user with '${error.errors[0]?.value || createUserDto.email}' (Email) already exists!`);
 
       throw new InternalServerErrorException(internalServerErrorMessage);
     }

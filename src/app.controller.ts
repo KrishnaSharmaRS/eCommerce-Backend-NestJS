@@ -1,8 +1,9 @@
-import { Controller } from "@nestjs/common";
+import { Controller, UsePipes, ValidationPipe } from "@nestjs/common";
 
 import { AppService } from "./app.service";
 
 @Controller()
+@UsePipes(ValidationPipe)
 export class AppController {
   constructor(private readonly appService: AppService) {}
 }

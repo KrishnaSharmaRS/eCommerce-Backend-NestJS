@@ -1,11 +1,11 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 
-import { IUserAddress, IUserAddressCreation } from "./user-addresses.types";
+import { IAddress, IAddressCreation } from "./addresses.types";
 import { UserModel } from "../user.model";
 import { IUser } from "../users.types";
 
-@Table({ tableName: "user_addresses", paranoid: true, modelName: "userAddress", underscored: false })
-export class UserAddressModel extends Model<IUserAddress, IUserAddressCreation> implements IUserAddress {
+@Table({ tableName: "addresses", paranoid: true, modelName: "address", underscored: false })
+export class AddressModel extends Model<IAddress, IAddressCreation> implements IAddress {
   @Column({ allowNull: false, type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
   id: string;
 
