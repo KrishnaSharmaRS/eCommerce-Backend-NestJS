@@ -13,6 +13,6 @@ export interface ICoupon extends IModel {
   validUpto: Date;
 }
 
-export type TCouponOptionalAttributes = OptionalCreationAttributes;
+export type TCouponOptionalAttributes = "status" | OptionalCreationAttributes;
 
 export type ICouponCreation = Optional<ICoupon, TCouponOptionalAttributes>;

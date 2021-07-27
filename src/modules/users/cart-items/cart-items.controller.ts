@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
 
 import { CreateCartItemDto, UpdateCartItemDto } from "./cart-item.dto";
 import { CartItemsService } from "./cart-items.service";
 
 @Controller("cart-items")
+@UsePipes(ValidationPipe)
 export class CartItemsController {
   constructor(private readonly cartItemsService: CartItemsService) {}
 

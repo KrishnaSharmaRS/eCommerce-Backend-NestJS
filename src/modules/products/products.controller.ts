@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CreateProductDto, UpdateProductDto } from "./product.dto";
 
 import { ProductsService } from "./products.service";
 
 @Controller("products")
+@UsePipes(ValidationPipe)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

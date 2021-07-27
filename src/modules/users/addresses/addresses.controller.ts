@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
 
 import { CreateAddressDto, UpdateAddressDto } from "./address.dto";
 import { AddressesService } from "./addresses.service";
 
 @Controller("addresses")
+@UsePipes(ValidationPipe)
 export class AddressesController {
   constructor(private readonly addressesService: AddressesService) {}
 

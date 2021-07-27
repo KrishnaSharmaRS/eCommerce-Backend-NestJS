@@ -32,10 +32,10 @@ export class OrderModel extends Model<IOrder, IOrderCreation> implements IOrder 
   status: EOrderStatus;
 
   @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
-  orderDate: Date;
+  orderDate: string;
 
   @Column({ type: DataType.DATE })
-  deliveryDate: Date;
+  deliveryDate: string;
 
   @Column({ type: DataType.UUID })
   couponId: string;
