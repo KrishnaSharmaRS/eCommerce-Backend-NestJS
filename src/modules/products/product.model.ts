@@ -19,11 +19,11 @@ export class ProductModel extends Model<IProduct, IProductCreation> implements I
   @Column({ type: DataType.STRING })
   sku: string;
 
-  @Column({ type: DataType.STRING })
-  size: string;
+  @Column({ type: DataType.TEXT })
+  images: string;
 
-  @Column({ type: DataType.STRING })
-  color: string;
+  @Column({ type: DataType.INTEGER.UNSIGNED })
+  price: number;
 
   @Column({ type: DataType.INTEGER.UNSIGNED })
   stock: number;

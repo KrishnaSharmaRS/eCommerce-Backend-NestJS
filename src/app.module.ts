@@ -12,11 +12,12 @@ import { UsersModule } from "./modules/users/users.module";
 import { ProductsModule } from "./modules/products/products.module";
 import { OrdersModule } from "./modules/orders/orders.module";
 import { CouponsModule } from "./modules/coupons/coupons.module";
+import { AwsS3Service } from "./modules/aws-s3/aws-s3.service";
 
 @Module({
   imports: [SequelizeModule.forRoot(sequelizeModuleOptions), UsersModule, ProductsModule, OrdersModule, CouponsModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AwsS3Service],
 })
 export class AppModule implements NestModule {
   configure(context: MiddlewareConsumer) {

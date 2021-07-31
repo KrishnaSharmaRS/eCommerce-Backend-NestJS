@@ -1,10 +1,10 @@
-import { IsOptional, Min } from "class-validator";
+import { IsJSON, IsOptional, Min } from "class-validator";
 
 import { IProductCreation } from "./products.types";
 import { IsStringLength } from "../../helpers/custom-validators";
 
 export class CreateProductDto implements IProductCreation {
-  @IsStringLength({ min: 1, max: 100 })
+  @IsStringLength({ min: 4, max: 100 })
   title: string;
 
   @IsStringLength({ min: 1, max: 1500 })
@@ -13,17 +13,16 @@ export class CreateProductDto implements IProductCreation {
   @IsStringLength({ min: 5, max: 50 })
   sku: string;
 
-  @IsStringLength({ min: 1, max: 50 })
-  size: string;
-
-  @IsStringLength({ min: 2, max: 50 })
-  color: string;
+  @Min(0)
+  price: number;
 
   @Min(0)
   stock: number;
+
+  images: string;
 }
 
-export class UpdateProductDto implements IProductCreation {
+export class UpdateProductDto {
   @IsOptional()
   @IsStringLength({ min: 1, max: 100 })
   title: string;
@@ -47,4 +46,8 @@ export class UpdateProductDto implements IProductCreation {
   @IsOptional()
   @Min(0)
   stock: number;
+
+  @IsOptional()
+  @IsJSON()
+  images: string;
 }

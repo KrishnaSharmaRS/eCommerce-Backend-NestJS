@@ -5,12 +5,12 @@ export interface IProduct extends IModel {
   title: string;
   description: string;
   sku: string;
-  size: string;
-  color: string;
+  price: number;
   stock: number;
+  images: string;
   isActive: boolean;
 }
 
-export type TProductOptionalAttributes = "isActive" | OptionalCreationAttributes;
+export type TProductOptionalAttributes = "isActive" | "images" | OptionalCreationAttributes;
 
 export type IProductCreation = Optional<IProduct, TProductOptionalAttributes>;
