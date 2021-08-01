@@ -2,6 +2,7 @@ import { IsJSON, IsOptional, Min } from "class-validator";
 
 import { IProductCreation } from "./products.types";
 import { IsStringLength } from "../../helpers/custom-validators";
+import { Transform } from "class-transformer";
 
 export class CreateProductDto implements IProductCreation {
   @IsStringLength({ min: 4, max: 100 })
@@ -14,12 +15,14 @@ export class CreateProductDto implements IProductCreation {
   sku: string;
 
   @Min(0)
+  @Transform((thisProperty) => +thisProperty.value)
   price: number;
 
   @Min(0)
+  @Transform((thisProperty) => +thisProperty.value)
   stock: number;
 
-  images: string;
+  images: string[];
 }
 
 export class UpdateProductDto {
@@ -49,5 +52,5 @@ export class UpdateProductDto {
 
   @IsOptional()
   @IsJSON()
-  images: string;
+  images: string[];
 }

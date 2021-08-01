@@ -19,8 +19,16 @@ export class ProductModel extends Model<IProduct, IProductCreation> implements I
   @Column({ type: DataType.STRING })
   sku: string;
 
-  @Column({ type: DataType.TEXT })
-  images: string;
+  @Column({
+    type: DataType.TEXT,
+    get() {
+      return JSON.parse(this.getDataValue("images") || "[]");
+    },
+    set(value) {
+      this.setDataValue("images", JSON.stringify(value));
+    },
+  })
+  images: string[];
 
   @Column({ type: DataType.INTEGER.UNSIGNED })
   price: number;

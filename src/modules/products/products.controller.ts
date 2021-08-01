@@ -52,7 +52,7 @@ export class ProductsController {
       imageUrls.push(imageUrl);
     }
 
-    createProductDto.images = JSON.stringify(imageUrls);
+    createProductDto.images = imageUrls;
     const response = await this.productsService.createProduct(createProductDto);
 
     return {

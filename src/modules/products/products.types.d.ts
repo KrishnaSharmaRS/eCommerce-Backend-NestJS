@@ -7,7 +7,7 @@ export interface IProduct extends IModel {
   sku: string;
   price: number;
   stock: number;
-  images: string;
+  images: string[];
   isActive: boolean;
 }
 
